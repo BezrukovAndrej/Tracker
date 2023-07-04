@@ -85,7 +85,7 @@ final class ScheduleViewController: UIViewController, UITableViewDelegate {
 
 extension ScheduleViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        week.count
+        WeekDay.allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

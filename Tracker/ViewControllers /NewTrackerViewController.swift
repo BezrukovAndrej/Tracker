@@ -106,7 +106,12 @@ final class NewTrackerViewController: UIViewController {
     @objc private func createButtonTapped() {
         dismiss(animated: true)
         let trackerName = textField.text ?? ""
-        self.delegate?.addNewTrackerCategory(TrackerCategory(title: "Новая категория", trackers: [Tracker.init(id: UUID(), text: trackerName, emoji: "🔥", color: .uiBlue, schedule: self.schedule)]))
+        self.delegate?.addNewTrackerCategory(TrackerCategory(title: "Новая категория",
+                                                             trackers: [Tracker.init(id: UUID(),
+                                                                                     text: trackerName,
+                                                                                     emoji: "🔥",
+                                                                                     color: .uiBlue,
+                                                                                     schedule: self.schedule)]))
     }
     
     // MARK: - Private func
@@ -145,6 +150,7 @@ extension NewTrackerViewController: UITableViewDataSource {
             cell.detailTextLabel?.text = currentCategory
         case 1:
             cell.textLabel?.text = "Расписание"
+            cell.detailTextLabel?.text = scheduleToString(for: schedule)
         default:
             break
         }
@@ -153,6 +159,14 @@ extension NewTrackerViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         75
+    }
+    
+    private func scheduleToString(for: [WeekDay]) -> String {
+        guard schedule.count != WeekDay.allCases.count else { return "Каждый день" }
+
+        let scheduleSorted = schedule.sorted()
+        let scheduleShortName = scheduleSorted.map { $0.shortName }.joined(separator: ", ")
+        return scheduleShortName
     }
 }
 
@@ -217,6 +231,7 @@ extension NewTrackerViewController: UITableViewDelegate {
 extension NewTrackerViewController: ScheduleViewControllerDelegate {
     func addNewScedule(_ newShedule: [WeekDay]) {
         schedule = newShedule
+        tableView.reloadData()
         buttonIsEnabled()
     }
 }

@@ -7,7 +7,8 @@
 
 import Foundation
 
-enum WeekDay: String, CaseIterable {
+enum WeekDay: String, Comparable, CaseIterable {
+    
     case monday
     case tuesday
     case wednesday
@@ -71,5 +72,28 @@ enum WeekDay: String, CaseIterable {
         case .sunday:
             return "Вс"
         }
+    }
+    
+    private var sortOrder: Int {
+        switch self {
+        case .monday:
+            return 0
+        case .tuesday:
+            return 1
+        case .wednesday:
+            return 2
+        case .thursday:
+            return 3
+        case .friday:
+            return 4
+        case .saturday:
+            return 5
+        case .sunday:
+            return 6
+        }
+    }
+    
+    static func < (lhs: WeekDay, rhs: WeekDay) -> Bool {
+        return lhs.sortOrder < rhs.sortOrder
     }
 }
