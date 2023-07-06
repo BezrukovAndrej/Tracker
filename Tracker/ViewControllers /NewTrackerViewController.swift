@@ -106,7 +106,7 @@ final class NewTrackerViewController: UIViewController {
     @objc private func createButtonTapped() {
         dismiss(animated: true)
         let trackerName = textField.text ?? ""
-        self.delegate?.addNewTrackerCategory(TrackerCategory(title: "Новая категория",
+        delegate?.addNewTrackerCategory(TrackerCategory(title: "Новая категория",
                                                              trackers: [Tracker.init(id: UUID(),
                                                                                      text: trackerName,
                                                                                      emoji: "🔥",
