@@ -60,6 +60,7 @@ final class ScheduleViewController: UIViewController, UITableViewDelegate {
         view.backgroundColor = .uiWhite
         addSubviews()
         setConstraints()
+        
     }
     
     // MARK: - Action private func

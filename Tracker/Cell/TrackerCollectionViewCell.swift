@@ -83,6 +83,7 @@ final class TrackerCollectionViewCell: UICollectionViewCell {
     func configRecord(countDay: Int, isDoneToday: Bool) {
         let title = isDoneToday ? "✓" : "+"
         plusButton.setTitle(title, for: .normal)
+        
         let opacity: Float = isDoneToday ? 0.3 : 1
         plusButton.layer.opacity = opacity
         
