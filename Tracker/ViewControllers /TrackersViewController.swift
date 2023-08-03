@@ -102,39 +102,17 @@ final class TrackersViewController: UIViewController {
         navigationItem.searchController = searchBar
     }
     
-//    private func setupViews() {
-//        updateVisibleCategories()
-//        let isCurrentDateTracker = categories.contains(where:  {
-//            $0.trackers.contains(where:  {
-//                $0.schedule.contains(where: {
-//                    $0.dayNumberOfWeek == currentDate.dayNumberOfWeek()
-//                })
-//            })
-//        })
-//
-//        if isCurrentDateTracker {
-//            updateVisibleCategories()
-//        }
-//
-//        trackerCollectionView.isHidden = !isCurrentDateTracker
-//        infoLabel.isHidden = isCurrentDateTracker
-//        infoImageView.isHidden = isCurrentDateTracker
-//        infoLabel.text = "Что будем отслеживать?"
-//        infoImageView.image = UIImage(named: "star")
-//    }
-    
     private func setupViews() {
-        
         updateVisibleCategories()
         
         if visibleCategories.isEmpty {
-            trackerCollectionView.isHidden = false
+            trackerCollectionView.isHidden = true
             infoLabel.isHidden = false
             infoImageView.isHidden = false
             infoLabel.text = "Что будем отслеживать?"
             infoImageView.image = UIImage(named: "star")
         } else {
-            trackerCollectionView.isHidden = true
+            trackerCollectionView.isHidden = false
             infoLabel.isHidden = true
             infoImageView.isHidden = true
         }
