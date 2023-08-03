@@ -84,8 +84,8 @@ final class TrackersViewController: UIViewController {
         categories = trackerCategoryStore.categories
         setupBar()
         addSubviews()
-        setupViews()
         setConstraints()
+        setupViews()
     }
     
     // MARK: - Private func
@@ -102,24 +102,42 @@ final class TrackersViewController: UIViewController {
         navigationItem.searchController = searchBar
     }
     
+//    private func setupViews() {
+//        updateVisibleCategories()
+//        let isCurrentDateTracker = categories.contains(where:  {
+//            $0.trackers.contains(where:  {
+//                $0.schedule.contains(where: {
+//                    $0.dayNumberOfWeek == currentDate.dayNumberOfWeek()
+//                })
+//            })
+//        })
+//
+//        if isCurrentDateTracker {
+//            updateVisibleCategories()
+//        }
+//
+//        trackerCollectionView.isHidden = !isCurrentDateTracker
+//        infoLabel.isHidden = isCurrentDateTracker
+//        infoImageView.isHidden = isCurrentDateTracker
+//        infoLabel.text = "Что будем отслеживать?"
+//        infoImageView.image = UIImage(named: "star")
+//    }
+    
     private func setupViews() {
-        let isCurrentDateTracker = categories.contains(where:  {
-            $0.trackers.contains(where:  {
-                $0.schedule.contains(where: {
-                    $0.dayNumberOfWeek == currentDate.dayNumberOfWeek()
-                })
-            })
-        })
-                                        
-        if isCurrentDateTracker {
-            updateVisibleCategories()
-        }
         
-        trackerCollectionView.isHidden = !isCurrentDateTracker
-        infoLabel.isHidden = isCurrentDateTracker
-        infoImageView.isHidden = isCurrentDateTracker
-        infoLabel.text = "Что будем отслеживать?"
-        infoImageView.image = UIImage(named: "star")
+        updateVisibleCategories()
+        
+        if visibleCategories.isEmpty {
+            trackerCollectionView.isHidden = false
+            infoLabel.isHidden = false
+            infoImageView.isHidden = false
+            infoLabel.text = "Что будем отслеживать?"
+            infoImageView.image = UIImage(named: "star")
+        } else {
+            trackerCollectionView.isHidden = true
+            infoLabel.isHidden = true
+            infoImageView.isHidden = true
+        }
     }
     
     private func updateVisibleCategories() {
@@ -138,7 +156,14 @@ final class TrackersViewController: UIViewController {
     }
     
     private func filterTreckerCategoryByDate(category: TrackerCategory) -> TrackerCategory {
-        let trackers = category.trackers.filter( { ($0.text.contains(textOfSearchQuery) || textOfSearchQuery.isEmpty) && ($0.schedule.contains(where: { $0.dayNumberOfWeek == currentDate.dayNumberOfWeek() }))})
+        let trackers = category.trackers.filter {
+            guard !$0.schedule.isEmpty else { return true }
+            let textContainsSearchQuery = $0.text.contains(textOfSearchQuery) || textOfSearchQuery.isEmpty
+            let scheduleСontainsChosenDate = $0.schedule.contains(where: { $0.dayNumberOfWeek == currentDate.dayNumberOfWeek() })
+            
+            return textContainsSearchQuery && scheduleСontainsChosenDate
+        }
+        
         let filterCategory = TrackerCategory(title: category.title, trackers: trackers)
         return filterCategory
     }
@@ -282,7 +307,7 @@ extension TrackersViewController: TrackerCollectionViewCellDelegate {
 extension TrackersViewController: TypeNewTrackerDelegate {
     func addNewTrackerCategory(_ newTrackerCategory: TrackerCategory) {
         dismiss(animated: true)
-        try! trackerCategoryStore.saveTracker(tracker: newTrackerCategory.trackers[0], to: newTrackerCategory.title)
+        try? trackerCategoryStore.saveTracker(tracker: newTrackerCategory.trackers[0], to: newTrackerCategory.title)
         categories = trackerCategoryStore.categories
         
         trackerCollectionView.reloadData()

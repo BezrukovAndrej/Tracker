@@ -35,11 +35,11 @@
 		911478412A57013900E5F178 /* GeometricParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911478402A57013900E5F178 /* GeometricParams.swift */; };
 		9118F7A22A77E12B00298615 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9118F7A02A77E12B00298615 /* Model.xcdatamodeld */; };
 		9118F7A52A77E28000298615 /* StoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9118F7A42A77E28000298615 /* StoreError.swift */; };
-		9118F7A72A77E39300298615 /* StoreUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9118F7A62A77E39300298615 /* StoreUpdate.swift */; };
 		9118F7A92A77E42600298615 /* WeekDaysMarshalling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9118F7A82A77E42600298615 /* WeekDaysMarshalling.swift */; };
 		9118F7AB2A77E51800298615 /* TrackerRecordStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9118F7AA2A77E51800298615 /* TrackerRecordStore.swift */; };
 		9118F7AD2A77E57900298615 /* TrackerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9118F7AC2A77E57900298615 /* TrackerStore.swift */; };
 		9118F7AF2A77F95400298615 /* TrackerCategoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9118F7AE2A77F95400298615 /* TrackerCategoryStore.swift */; };
+		915F958B2A7BEA4900F7EDEB /* StoreUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915F958A2A7BEA4900F7EDEB /* StoreUpdate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,11 +73,11 @@
 		911478402A57013900E5F178 /* GeometricParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometricParams.swift; sourceTree = "<group>"; };
 		9118F7A12A77E12B00298615 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		9118F7A42A77E28000298615 /* StoreError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreError.swift; sourceTree = "<group>"; };
-		9118F7A62A77E39300298615 /* StoreUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreUpdate.swift; sourceTree = "<group>"; };
 		9118F7A82A77E42600298615 /* WeekDaysMarshalling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDaysMarshalling.swift; sourceTree = "<group>"; };
 		9118F7AA2A77E51800298615 /* TrackerRecordStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerRecordStore.swift; sourceTree = "<group>"; };
 		9118F7AC2A77E57900298615 /* TrackerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerStore.swift; sourceTree = "<group>"; };
 		9118F7AE2A77F95400298615 /* TrackerCategoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerCategoryStore.swift; sourceTree = "<group>"; };
+		915F958A2A7BEA4900F7EDEB /* StoreUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreUpdate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,8 +222,8 @@
 				9118F7AA2A77E51800298615 /* TrackerRecordStore.swift */,
 				9118F7AE2A77F95400298615 /* TrackerCategoryStore.swift */,
 				9118F7A42A77E28000298615 /* StoreError.swift */,
-				9118F7A62A77E39300298615 /* StoreUpdate.swift */,
 				9118F7A82A77E42600298615 /* WeekDaysMarshalling.swift */,
+				915F958A2A7BEA4900F7EDEB /* StoreUpdate.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -303,7 +303,6 @@
 				9114781A2A54882D00E5F178 /* NewTrackerViewController.swift in Sources */,
 				911478412A57013900E5F178 /* GeometricParams.swift in Sources */,
 				9114782D2A5488DF00E5F178 /* UIFonts + Exntesions.swift in Sources */,
-				9118F7A72A77E39300298615 /* StoreUpdate.swift in Sources */,
 				911478232A54887A00E5F178 /* TabBarController.swift in Sources */,
 				9114781C2A54884000E5F178 /* ScheduleViewController.swift in Sources */,
 				9118F7AB2A77E51800298615 /* TrackerRecordStore.swift in Sources */,
@@ -319,6 +318,7 @@
 				911477F12A54867200E5F178 /* AppDelegate.swift in Sources */,
 				9114782F2A5488EE00E5F178 /* UIView + Extensions .swift in Sources */,
 				911477F32A54867200E5F178 /* SceneDelegate.swift in Sources */,
+				915F958B2A7BEA4900F7EDEB /* StoreUpdate.swift in Sources */,
 				911478132A5487D600E5F178 /* TrackerCollectionViewCell.swift in Sources */,
 				9114783D2A56FFE800E5F178 /* SupplementaryView.swift in Sources */,
 				9114780C2A54878F00E5F178 /* TrackerRecord.swift in Sources */,
