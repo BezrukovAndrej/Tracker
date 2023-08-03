@@ -17,22 +17,27 @@ extension UIColor {
     static let uiRed = UIColor(named: "UIRed") ?? clear
     static let uiWhite = UIColor(named: "UIWhite") ?? clear
     
-    static let usColor1 = UIColor(named: "UsColor1") ?? clear
-    static let usColor2 = UIColor(named: "UsColor2") ?? clear
-    static let usColor3 = UIColor(named: "UsColor3") ?? clear
-    static let usColor4 = UIColor(named: "UsColor4") ?? clear
-    static let usColor5 = UIColor(named: "UsColor5") ?? clear
-    static let usColor6 = UIColor(named: "UsColor6") ?? clear
-    static let usColor7 = UIColor(named: "UsColor7") ?? clear
-    static let usColor8 = UIColor(named: "UsColor8") ?? clear
-    static let usColor9 = UIColor(named: "UsColor8") ?? clear
-    static let usColor10 = UIColor(named: "UsColor10") ?? clear
-    static let usColor11 = UIColor(named: "UsColor11") ?? clear
-    static let usColor12 = UIColor(named: "UsColor12") ?? clear
-    static let usColor13 = UIColor(named: "UsColor13") ?? clear
-    static let usColor14 = UIColor(named: "UsColor14") ?? clear
-    static let usColor15 = UIColor(named: "UsColor15") ?? clear
-    static let usColor16 = UIColor(named: "UsColor16") ?? clear
-    static let usColor17 = UIColor(named: "UsColor17") ?? clear
-    static let usColor18 = UIColor(named: "UsColor18") ?? clear
+    static func hexString(from color: UIColor) -> String {
+        let components = color.cgColor.components
+        let r: CGFloat = components?[0] ?? 0.0
+        let g: CGFloat = components?[1] ?? 0.0
+        let b: CGFloat = components?[2] ?? 0.0
+        return String.init(
+            format: "%02lX%02lX%02lX",
+            lroundf(Float(r * 255)),
+            lroundf(Float(g * 255)),
+            lroundf(Float(b * 255))
+        )
+    }
+
+    static func color(from hex: String) -> UIColor {
+        var rgbValue:UInt64 = 0
+        Scanner(string: hex).scanHexInt64(&rgbValue)
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
 }

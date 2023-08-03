@@ -14,6 +14,7 @@ protocol ScheduleViewControllerDelegate: AnyObject {
 final class ScheduleViewController: UIViewController, UITableViewDelegate {
     
     weak var delegate: ScheduleViewControllerDelegate?
+    var swichDay: [WeekDay] = []
     private var swichDays: [WeekDay] = []
     private var week = WeekDay.allCases
     
@@ -77,6 +78,7 @@ final class ScheduleViewController: UIViewController, UITableViewDelegate {
                 swichDays.remove(at: index)
             }
         }
+        
         buttonIsEnabled(!swichDays.isEmpty)
     }
 }
@@ -100,6 +102,12 @@ extension ScheduleViewController: UITableViewDataSource {
         cell.textLabel?.text = week[indexPath.row].dayName
         cell.textLabel?.font = UIFont.ypRegular17()
         cell.accessoryView = swicher
+        
+        if swichDay.contains(week[indexPath.row]) {
+                 swicher.isOn = true
+             } else {
+                 swicher.isOn = false
+             }
         
         return cell
     }
