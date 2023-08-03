@@ -41,7 +41,6 @@ final class TrackerStore: NSObject {
         trackerCoreData.trackerName = tracker.text
         trackerCoreData.trackerEmoji = tracker.emoji
         trackerCoreData.trackerColor = UIColor.hexString(from: tracker.color)
-        
         trackerCoreData.trackerSchedule = weekDaysMarshalling.convertWeekDaysToString(tracker.schedule)
         
         return trackerCoreData

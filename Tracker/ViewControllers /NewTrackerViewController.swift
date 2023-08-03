@@ -19,6 +19,7 @@ final class NewTrackerViewController: UIViewController {
     private var heightTableView: CGFloat = 74
     private var currentCategory: String? = "Новая категория"
     private var schedule: [WeekDay] = []
+    private var swichDays: [WeekDay] = []
     private var trackerText = ""
     private var emoji = ""
     private var color: UIColor = .clear
@@ -128,7 +129,7 @@ final class NewTrackerViewController: UIViewController {
                                                                                      text: trackerName,
                                                                                      emoji: emoji,
                                                                                      color: color,
-                                                                                     schedule: self.schedule)]))
+                                                                                     schedule: schedule)]))
     }
     
     // MARK: - Private func
@@ -246,6 +247,7 @@ extension NewTrackerViewController: UITableViewDelegate {
         case 1:
             let sheduleVC = ScheduleViewController()
             sheduleVC.delegate = self
+            sheduleVC.swichDay = swichDays
             present(sheduleVC, animated: true)
         default:
             break
@@ -258,6 +260,7 @@ extension NewTrackerViewController: UITableViewDelegate {
 extension NewTrackerViewController: ScheduleViewControllerDelegate {
     func addNewScedule(_ newShedule: [WeekDay]) {
         schedule = newShedule
+        swichDays = newShedule
         tableView.reloadData()
         buttonIsEnabled()
     }

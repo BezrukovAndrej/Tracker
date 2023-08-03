@@ -40,7 +40,6 @@
 		9118F7AB2A77E51800298615 /* TrackerRecordStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9118F7AA2A77E51800298615 /* TrackerRecordStore.swift */; };
 		9118F7AD2A77E57900298615 /* TrackerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9118F7AC2A77E57900298615 /* TrackerStore.swift */; };
 		9118F7AF2A77F95400298615 /* TrackerCategoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9118F7AE2A77F95400298615 /* TrackerCategoryStore.swift */; };
-		916541D22A7A6A5300AE1D79 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916541D12A7A6A5300AE1D79 /* DateHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,7 +78,6 @@
 		9118F7AA2A77E51800298615 /* TrackerRecordStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerRecordStore.swift; sourceTree = "<group>"; };
 		9118F7AC2A77E57900298615 /* TrackerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerStore.swift; sourceTree = "<group>"; };
 		9118F7AE2A77F95400298615 /* TrackerCategoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerCategoryStore.swift; sourceTree = "<group>"; };
-		916541D12A7A6A5300AE1D79 /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,7 +189,6 @@
 				911478252A54889900E5F178 /* Constants.swift */,
 				911478272A5488AE00E5F178 /* Date+Extension.swift */,
 				911478402A57013900E5F178 /* GeometricParams.swift */,
-				916541D12A7A6A5300AE1D79 /* DateHelper.swift */,
 				911478292A5488BE00E5F178 /* UIKit */,
 			);
 			path = Helpers;
@@ -310,7 +307,6 @@
 				911478232A54887A00E5F178 /* TabBarController.swift in Sources */,
 				9114781C2A54884000E5F178 /* ScheduleViewController.swift in Sources */,
 				9118F7AB2A77E51800298615 /* TrackerRecordStore.swift in Sources */,
-				916541D22A7A6A5300AE1D79 /* DateHelper.swift in Sources */,
 				911478162A5487F900E5F178 /* TrackersViewController.swift in Sources */,
 				9114783F2A5700EE00E5F178 /* EmojiAndColorsCollection.swift in Sources */,
 				9114781E2A54884F00E5F178 /* HeaderCollectionView.swift in Sources */,

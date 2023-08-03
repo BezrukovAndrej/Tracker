@@ -50,7 +50,5 @@ final class EmojiAndColorsCollectionCell: UICollectionViewCell {
             label.centerXAnchor.constraint(equalTo: centerXAnchor),
             label.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
-        
-        
     }
 }

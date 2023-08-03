@@ -165,12 +165,7 @@ extension TrackersViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
         textOfSearchQuery = searchController.searchBar.text ?? ""
-        if searchController.isActive {
-            updateVisibleCategories()
-            } else {
-                infoLabel.text = "Что будем отслеживать?"
-                infoImageView.image = UIImage(named: "star")
-            }
+        updateVisibleCategories()
         }
     }
 
@@ -250,25 +245,35 @@ extension TrackersViewController: UICollectionViewDelegateFlowLayout {
 
 extension TrackersViewController: TrackerCollectionViewCellDelegate {
     func plusButtonTapped(cell: TrackerCollectionViewCell) {
-        let indexPath: IndexPath = trackerCollectionView.indexPath(for: cell) ?? IndexPath()
-        let id = visibleCategories[indexPath.section].trackers[indexPath.row].id
-        var daysCount = completedTrackers.filter { $0.id == id }.count
-        let completedTracker = TrackerRecord(id: id, date: formattedCurrentDate)
+        guard let indexPath = trackerCollectionView.indexPath(for: cell) else {
+            return
+        }
         
-        if  datePicker.date <= Calendar.current.startOfDay(for: Date()) {
-            if !completedTrackers.contains(where: { $0.id == id && $0.date == formattedCurrentDate }) {
-                daysCount += 1
-                cell.configRecord(countDay: daysCount, isDoneToday: true)
+        let tracker = visibleCategories[indexPath.section].trackers[indexPath.row]
+        let id = tracker.id
+        let formattedDate = formattedCurrentDate
+        
+        let hasTrackerRecord = completedTrackers.contains { record in
+            return record.id == id && record.date == formattedDate
+        }
+        
+        if datePicker.date <= Calendar.current.startOfDay(for: Date()) {
+            if !hasTrackerRecord {
+                let completedTracker = TrackerRecord(id: id, date: formattedDate)
                 try? trackerRecordStore.add(completedTracker)
-                trackerCollectionView.reloadData()
+                completedTrackers.insert(completedTracker)
+                
+                let daysCount = completedTrackers.filter { $0.id == id }.count
+                cell.configRecord(countDay: daysCount, isDoneToday: true)
             } else {
+                let completedTracker = TrackerRecord(id: id, date: formattedDate)
+                try? trackerRecordStore.remove(completedTracker)
+                completedTrackers.remove(completedTracker)
+                
+                let daysCount = completedTrackers.filter { $0.id == id }.count
                 cell.configRecord(countDay: daysCount, isDoneToday: false)
-                try? trackerRecordStore.remove(TrackerRecord(id: id, date: formattedCurrentDate))
-                daysCount -= 1
             }
         }
-        trackerCollectionView.reloadData()
-        completedTrackers = trackerRecordStore.records
     }
 }
 

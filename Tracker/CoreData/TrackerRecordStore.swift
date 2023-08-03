@@ -50,11 +50,9 @@ final class TrackerRecordStore: NSObject {
     func remove(_ record: TrackerRecord) throws {
         let request = NSFetchRequest<TrackerRecordCoreData>(entityName: "TrackerRecordCoreData")
         request.predicate = NSPredicate(format: "%K == %@",#keyPath(TrackerRecordCoreData.recordId),record.id.uuidString)
-        
         let records = try context.fetch(request)
         guard let recordToRemove = records.first else { return }
         context.delete(recordToRemove)
-        
         try context.save()
     }
     
@@ -63,7 +61,7 @@ final class TrackerRecordStore: NSObject {
             let id = coreData.recordId,
             let date = coreData.recordDate
         else { throw StoreError.decodingErrorInvalidTrackerRecord }
-        
+
         return TrackerRecord(id: id, date: date)
     }
 }
