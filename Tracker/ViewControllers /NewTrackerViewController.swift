@@ -18,11 +18,18 @@ final class NewTrackerViewController: UIViewController {
     private let emojiAndColorsCollection = EmojiAndColorsCollection()
     private var heightTableView: CGFloat = 74
     private var currentCategory: String? = "Новая категория"
-    private var schedule: [WeekDay] = []
+    private var schedule: [WeekDay]?
     private var swichDays: [WeekDay] = []
     private var trackerText = ""
     private var emoji = ""
     private var color: UIColor = .clear
+    private var lastCategory = ""
+    
+    private var chosenName = false
+    private var chosenCategory = false
+    private var chosenSchedule = false
+    private var chosenEmoji = false
+    private var chosenColor = false
     
     private lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
@@ -122,14 +129,45 @@ final class NewTrackerViewController: UIViewController {
     }
     
     @objc private func createButtonTapped() {
-        dismiss(animated: true)
-        let trackerName = textField.text ?? ""
-        delegate?.addNewTrackerCategory(TrackerCategory(title: "Новая категория",
-                                                             trackers: [Tracker.init(id: UUID(),
-                                                                                     text: trackerName,
-                                                                                     emoji: emoji,
-                                                                                     color: color,
-                                                                                     schedule: schedule)]))
+        dismiss(animated: true) { [weak self] in
+            guard let self = self else { return }
+            switch self.typeOfNewTracker {
+            case .eventTracker:
+                let trackerName = textField.text ?? ""
+                self.delegate?.addNewTrackerCategory(TrackerCategory(title: lastCategory, trackers: [Tracker(id: UUID(), text: trackerName, emoji: emoji, color: color, schedule: WeekDay.allCases)]))
+                
+            case .habitTracker:
+                guard let schedule = schedule else { return }
+                let trackerName = textField.text ?? ""
+                self.delegate?.addNewTrackerCategory(TrackerCategory(title: lastCategory, trackers: [Tracker(id: UUID(), text: trackerName, emoji: emoji, color: color, schedule: schedule)]))
+            case .none: break
+            }
+        }
+    }
+    
+    private func buttonIsEnabled() {
+        switch typeOfNewTracker {
+        case .habitTracker:
+            if chosenName == true && chosenCategory == true && chosenSchedule == true && chosenEmoji == true && chosenColor == true {
+                saveButton.backgroundColor = .uiBlack
+                saveButton.setTitleColor(.uiWhite, for: .normal)
+                saveButton.isEnabled = true
+            } else {
+                saveButton.backgroundColor = .uiGray
+                saveButton.setTitleColor(.white, for: .normal)
+            }
+            
+        case .eventTracker:
+            if chosenName == true && chosenCategory == true && chosenEmoji == true && chosenColor == true {
+                saveButton.backgroundColor = .uiBlack
+                saveButton.setTitleColor(.uiWhite, for: .normal)
+                saveButton.isEnabled = true
+            } else {
+                saveButton.backgroundColor = .uiGray
+                saveButton.setTitleColor(.white, for: .normal)
+            }
+        case .none: break
+        }
     }
     
     // MARK: - Private func
@@ -142,14 +180,6 @@ final class NewTrackerViewController: UIViewController {
         collectionView.delegate = emojiAndColorsCollection
         collectionView.dataSource = emojiAndColorsCollection
         emojiAndColorsCollection.delegate = self
-    }
-    
-    private func buttonIsEnabled() {
-        if textField.text?.isEmpty == false && ((currentCategory?.isEmpty != nil)) {
-            saveButton.backgroundColor = .uiBlack
-            saveButton.setTitleColor(.uiWhite, for: .normal)
-            saveButton.isEnabled = true
-        }
     }
 }
 
@@ -175,10 +205,18 @@ extension NewTrackerViewController: UITableViewDataSource {
         switch indexPath.row {
         case 0:
             cell.textLabel?.text = "Категория"
-            cell.detailTextLabel?.text = currentCategory
+            cell.detailTextLabel?.text = lastCategory
         case 1:
             cell.textLabel?.text = "Расписание"
-            cell.detailTextLabel?.text = scheduleToString(for: schedule)
+            if schedule == WeekDay.allCases {
+                cell.detailTextLabel?.text = "Каждый день"
+            } else {
+                if let schedule = schedule {
+                    cell.detailTextLabel?.text = schedule
+                        .map { $0.shortName }
+                        .joined(separator: ", ")
+                }
+            }
         default:
             break
         }
@@ -187,14 +225,6 @@ extension NewTrackerViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         75
-    }
-    
-    private func scheduleToString(for: [WeekDay]) -> String {
-        guard schedule.count != WeekDay.allCases.count else { return "Каждый день" }
-
-        let scheduleSorted = schedule.sorted()
-        let scheduleShortName = scheduleSorted.map { $0.shortName }.joined(separator: ", ")
-        return scheduleShortName
     }
 }
 
@@ -211,28 +241,16 @@ extension NewTrackerViewController: UITextFieldDelegate {
         
         if range.location == 0 && string == " " {
             return false
+        } else if textField.text?.isEmpty == true && !string.isEmpty {
+            chosenName = true
         }
         
-        switch typeOfNewTracker {
-        case .habitTracker:
-            if schedule.isEmpty == false {
-                buttonIsEnabled()
-                return true
-            }
-        case .eventTracker:
-            buttonIsEnabled()
-            return true
-        case .none:
-            return true
-        }
         return true
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
         if textField.text?.isEmpty == true {
-            saveButton.backgroundColor = .uiGray
-            saveButton.setTitleColor(.uiWhite, for: .normal)
-            saveButton.isEnabled = false
+            chosenName = false
         }
     }
 }
@@ -243,14 +261,18 @@ extension NewTrackerViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            break
+            guard let categoriesVC = CategoriesAssembly().assemle(
+                    with: CategoryConfiguration(lastCategory: lastCategory)
+            ) as? CategoriesViewController
+            else { return }
+            categoriesVC.delegate = self
+            present(categoriesVC, animated: true)
         case 1:
-            let sheduleVC = ScheduleViewController()
-            sheduleVC.delegate = self
-            sheduleVC.swichDay = swichDays
-            present(sheduleVC, animated: true)
-        default:
-            break
+            let scheduleVC = ScheduleViewController()
+            scheduleVC.delegate = self
+            scheduleVC.swichDay = swichDays
+            present(scheduleVC, animated: true)
+        default: break
         }
     }
 }
@@ -261,8 +283,9 @@ extension NewTrackerViewController: ScheduleViewControllerDelegate {
     func addNewScedule(_ newShedule: [WeekDay]) {
         schedule = newShedule
         swichDays = newShedule
-        tableView.reloadData()
+        chosenSchedule = true
         buttonIsEnabled()
+        tableView.reloadData()
     }
 }
 
@@ -271,10 +294,23 @@ extension NewTrackerViewController: ScheduleViewControllerDelegate {
 extension NewTrackerViewController: EmojiAndColorsCollectionDelegate {
     func addNewEmoji(_ emoji: String) {
         self.emoji = emoji
+        chosenEmoji = true
+        buttonIsEnabled()
     }
     
     func addNewColor(_ color: UIColor) {
         self.color = color
+        chosenColor = true
+        buttonIsEnabled()
+    }
+}
+
+extension NewTrackerViewController: CategoriesViewControllerDelegate {
+    func didSelectCategory(with name: String?) {
+        lastCategory = name ?? ""
+        chosenCategory = true
+        buttonIsEnabled()
+        tableView.reloadData()
     }
 }
 
