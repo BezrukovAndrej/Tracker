@@ -14,7 +14,7 @@ final class HeaderCollectionView: UICollectionReusableView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.ypBold19()
-        label.textColor = .uiBlack
+        label.textColor = .toggleBlackWhiteColor
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

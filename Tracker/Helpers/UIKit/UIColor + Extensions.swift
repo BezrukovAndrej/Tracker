@@ -17,6 +17,14 @@ extension UIColor {
     static let uiRed = UIColor(named: "UIRed") ?? clear
     static let uiWhite = UIColor(named: "UIWhite") ?? clear
     
+    static let toggleBlackWhiteColor = UIColor { (traits: UITraitCollection) -> UIColor in
+        if traits.userInterfaceStyle == .light {
+            return UIColor.black
+        } else {
+            return UIColor.white
+        }
+    }
+    
     static func hexString(from color: UIColor) -> String {
         let components = color.cgColor.components
         let r: CGFloat = components?[0] ?? 0.0

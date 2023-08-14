@@ -22,4 +22,10 @@ extension Date {
     func dayNumber() -> Int? {
         return Calendar.current.dateComponents([.day, .month, .year], from: self).day
     }
+    
+    func onlyDate() -> Date {
+        let components = Calendar.current.dateComponents([.year, .month, .day], from: self)
+        let date = Calendar.current.date(from: components)
+        return date!
+    }
 }
