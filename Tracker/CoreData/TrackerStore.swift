@@ -95,7 +95,6 @@ final class TrackerStore: NSObject {
         try fetchedResultsController.performFetch()
         return fetchedResultsController.fetchedObjects?.first
     }
-    
 }
 
 // MARK: - TrackerStoreProtocol
@@ -229,7 +228,6 @@ extension TrackerStore: TrackerStoreProtocol {
         try context.save()
     }
 }
-
 
 // MARK: - NSFetchedResultsControllerDelegate
 

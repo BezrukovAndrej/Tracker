@@ -81,14 +81,14 @@ final class StatisticCell: UITableViewCell {
     func configureCell(with model: StatisticsCellModel) {
         contentView.backgroundColor = .uiWhite
         
-        setElements()
-        setupConstraints()
+        addSubview()
+        setConstraints()
         
         valueLabel.text = model.value
         descriptionLabel.text = model.description
     }
     
-    private func setElements() {
+    private func addSubview() {
         contentView.addViewsTAMIC(gradientBorderView)
         gradientBorderView.addViewsTAMIC(mainView)
         mainView.addViewsTAMIC(stackView)
@@ -96,7 +96,8 @@ final class StatisticCell: UITableViewCell {
         stackView.addArrangedSubview(descriptionLabel)
     }
     
-    private func setupConstraints() {
+    private func setConstraints() {
+        
         NSLayoutConstraint.activate([
             gradientBorderView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             gradientBorderView.topAnchor.constraint(equalTo: contentView.topAnchor),

@@ -27,7 +27,7 @@ final class CategoryCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        setupContent()
+        setConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -48,13 +48,14 @@ final class CategoryCell: UITableViewCell {
         self.label.text = label
     }
     
-    private func setupContent() {
+    private func setConstraints() {
         selectionStyle = .none
         contentView.backgroundColor = .uiBackground
         
         [label, checkmarkImage].forEach {contentView.addViewsTAMIC($0)}
         
         NSLayoutConstraint.activate([
+            
             label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 27),
             label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -26),

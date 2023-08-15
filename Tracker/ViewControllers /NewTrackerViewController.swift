@@ -582,6 +582,7 @@ extension NewTrackerViewController {
     private func setConstraints() {
         
         NSLayoutConstraint.activate([
+            
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 40),
             

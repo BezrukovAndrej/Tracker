@@ -59,11 +59,11 @@ final class ScheduleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.dataSource = self
-        tableView.delegate = self
-        
         addSubviews()
         setConstraints()
+        
+        tableView.dataSource = self
+        tableView.delegate = self
     }
     
     override func viewWillDisappear(_ animated: Bool) {

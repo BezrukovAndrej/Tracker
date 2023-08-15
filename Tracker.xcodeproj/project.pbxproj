@@ -237,8 +237,8 @@
 				911478072A54876C00E5F178 /* Tracker.swift */,
 				9114780F2A5487B200E5F178 /* TrackerCategory.swift */,
 				9114780B2A54878F00E5F178 /* TrackerRecord.swift */,
-				9100CFAD2A8A2D6500E74328 /* StatisticsCellModel.swift */,
 				911478092A54877E00E5F178 /* WeekDay.swift */,
+				9100CFAD2A8A2D6500E74328 /* StatisticsCellModel.swift */,
 				9100CFB32A8A2F0E00E74328 /* StatisticsViewModel.swift */,
 				91AEDE662A824EA500E974A8 /* CategoriesViewModel.swift */,
 			);
@@ -286,7 +286,6 @@
 				911478252A54889900E5F178 /* Constants.swift */,
 				911478272A5488AE00E5F178 /* Date+Extension.swift */,
 				91AEDE6A2A82503A00E974A8 /* Observable.swift */,
-				9100CFBF2A8A530100E74328 /* UICollectionView+Extension.swift */,
 				911478292A5488BE00E5F178 /* UIKit */,
 			);
 			path = Helpers;
@@ -295,6 +294,7 @@
 		911478292A5488BE00E5F178 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				9100CFBF2A8A530100E74328 /* UICollectionView+Extension.swift */,
 				9100CFA52A8A2A4B00E74328 /* UIViewController+Extension.swift */,
 				9114782A2A5488D000E5F178 /* UIColor + Extensions.swift */,
 				9114782C2A5488DF00E5F178 /* UIFonts + Exntesions.swift */,

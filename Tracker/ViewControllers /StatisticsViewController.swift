@@ -61,12 +61,13 @@ final class StatisticViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.dataSource = self
-        tableView.delegate = self
-        
         addSubviews()
         setConstraints()
         bindingViewModel()
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -147,7 +148,7 @@ extension StatisticViewController {
         view.backgroundColor = .uiWhite
         
         [titleLabel, emptyStatisticsLabel,
-         emptyStatisticsImageView, tableView].forEach { view.addViewsTAMIC($0)}
+         emptyStatisticsImageView, tableView].forEach { view.addViewsTAMIC($0) }
     }
     
     private func setConstraints() {

@@ -40,6 +40,7 @@ final class EmojiAndColorsCollectionCell: UICollectionViewCell {
     }
     
     private func addSubview() {
+        
         addSubview(label)
     }
     
