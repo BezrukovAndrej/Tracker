@@ -22,8 +22,6 @@ final class TrackerAppTests: XCTestCase {
     }
     
 }
-//(traits: .init(userInterfaceStyle: .light))
-//(traits: .init(userInterfaceStyle: .dark))
 
 private class StubTrackerStore: TrackerStoreProtocol {
     var delegate: TrackerStoreDelegate?
