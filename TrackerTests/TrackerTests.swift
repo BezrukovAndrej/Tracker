@@ -2,7 +2,7 @@
 //  TrackerTests.swift
 //  TrackerTests
 //
-//  Created by Andrey Bezrukov on 14.08.2023.
+//  Created by Andrey Bezrukov on 15.08.2023.
 //
 
 import XCTest
@@ -22,7 +22,8 @@ final class TrackerAppTests: XCTestCase {
     }
     
 }
-
+//(traits: .init(userInterfaceStyle: .light))
+//(traits: .init(userInterfaceStyle: .dark))
 
 private class StubTrackerStore: TrackerStoreProtocol {
     var delegate: TrackerStoreDelegate?
@@ -34,7 +35,7 @@ private class StubTrackerStore: TrackerStoreProtocol {
             Tracker(
                 id: UUID(),
                 color: .uiRed,
-                text: "Приветствовать руководителя",
+                text: "Покушать вкусно!",
                 emoji: "❤️",
                 completedDaysCount: 10,
                 schedule: [.saturday],
@@ -46,7 +47,7 @@ private class StubTrackerStore: TrackerStoreProtocol {
             Tracker(
                 id: UUID(),
                 color: .blue,
-                text: "Вспомнить о хорошем питомце",
+                text: "Выгулять мохнатую чудовище",
                 emoji: "😻",
                 completedDaysCount: 2,
                 schedule: nil,
@@ -56,7 +57,7 @@ private class StubTrackerStore: TrackerStoreProtocol {
             Tracker(
                 id: UUID(),
                 color: .green,
-                text: "Подарить цветы",
+                text: "Подарить цветы шкуре",
                 emoji: "🌺",
                 completedDaysCount: 1,
                 schedule: nil,
