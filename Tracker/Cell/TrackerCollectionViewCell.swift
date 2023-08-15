@@ -108,9 +108,11 @@ final class TrackerCollectionViewCell: UICollectionViewCell {
         if isDone {
             plusButton.setImage(UIImage(systemName: "checkmark"), for: .normal)
             plusButton.layer.opacity = 0.3
+            plusButton.tintColor = .blackWhiteColorCell
         } else {
             plusButton.setImage(UIImage(systemName: "plus"), for: .normal)
             plusButton.layer.opacity = 1
+            plusButton.tintColor = .blackWhiteColorCell
         }
     }
     

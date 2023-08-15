@@ -25,6 +25,7 @@ final class SelectTypeEventViewController: UIViewController {
     private lazy var addRegularEventButton: UIButton = {
         let button = UIButton(type: .custom)
         button.backgroundColor = .toggleBlackWhiteColor
+        button.setTitleColor(UIColor.blackWhiteColorButton, for: .normal)
         button.setTitle(NSLocalizedString("habit", comment: ""), for: .normal)
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = UIFont.ypMedium16()
@@ -37,6 +38,7 @@ final class SelectTypeEventViewController: UIViewController {
     private lazy var addIrregularEventButton: UIButton = {
         let button = UIButton(type: .custom)
         button.backgroundColor = .toggleBlackWhiteColor
+        button.setTitleColor(UIColor.blackWhiteColorButton, for: .normal)
         button.setTitle(NSLocalizedString("event", comment: ""), for: .normal)
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = UIFont.ypMedium16()

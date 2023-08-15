@@ -28,6 +28,7 @@ protocol TrackerStoreProtocol {
 }
 
 final class TrackerStore: NSObject {
+    
     static let shared = TrackerStore()
     weak var delegate: TrackerStoreDelegate?
     

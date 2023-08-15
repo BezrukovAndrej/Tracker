@@ -34,6 +34,7 @@ final class ScheduleViewController: UIViewController {
     
     private lazy var confirmButton: UIButton = {
         let button = UIButton(type: .custom)
+        button.setTitleColor(.blackGrayColorButton, for: .normal)
         button.backgroundColor = .toggleBlackWhiteColor
         button.setTitle(NSLocalizedString("ready", comment: ""), for: .normal)
         button.titleLabel?.textAlignment = .center

@@ -19,7 +19,7 @@ final class CategoryCell: UITableViewCell {
     
     private var label: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .toggleBlackWhiteColor
         label.font = UIFont.systemFont(ofSize: 17)
         return label
     }()

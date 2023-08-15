@@ -28,6 +28,7 @@ enum StatisticsCases: CaseIterable, CustomStringConvertible {
 }
 
 final class StatisticsViewModel {
+    
     private let trackerRecordStore = TrackerRecordStore.shared
     
     var cellModels: [StatisticsCellModel] = {
@@ -67,7 +68,6 @@ final class StatisticsViewModel {
     }
     
     private func observeBestPeriod() { }
-    
     private func observePerfectDays() { }
     
     private func observeComplitedTrackers() {

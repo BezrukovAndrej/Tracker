@@ -43,7 +43,7 @@ final class TabBarController: UITabBarController {
         let dataSource: [TabBarItem] = [.tracker, .statistic]
         
         let lineView = UIView(frame: CGRect(x: 0, y: 0, width: tabBar.frame.width, height: 1))
-        lineView.backgroundColor = UIColor.uiGray
+        lineView.backgroundColor = UIColor.tabBarBorderLineColor
         tabBar.insertSubview(lineView, at: 0)
 
         tabBar.barTintColor = .uiGray

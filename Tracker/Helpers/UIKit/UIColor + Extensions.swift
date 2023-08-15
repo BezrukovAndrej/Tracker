@@ -25,6 +25,38 @@ extension UIColor {
         }
     }
     
+    static let blackWhiteColorCell = UIColor { (traits: UITraitCollection) -> UIColor in
+        if traits.userInterfaceStyle == .light {
+            return UIColor.white
+        } else {
+            return UIColor.black
+        }
+    }
+    
+    static let tabBarBorderLineColor = UIColor { (traits: UITraitCollection) -> UIColor in
+        if traits.userInterfaceStyle == .light {
+            return UIColor.uiGray
+        } else {
+            return UIColor.black
+        }
+    }
+    
+    static let blackWhiteColorButton = UIColor { (traits: UITraitCollection) -> UIColor in
+        if traits.userInterfaceStyle == .light {
+            return UIColor.uiWhite
+        } else {
+            return UIColor.black
+        }
+    }
+    
+    static let blackGrayColorButton = UIColor { (traits: UITraitCollection) -> UIColor in
+        if traits.userInterfaceStyle == .light {
+            return UIColor.white
+        } else {
+            return UIColor.black
+        }
+    }
+    
     static func hexString(from color: UIColor) -> String {
         let components = color.cgColor.components
         let r: CGFloat = components?[0] ?? 0.0

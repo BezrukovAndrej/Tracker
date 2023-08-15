@@ -37,14 +37,14 @@ final class StatisticCell: UITableViewCell {
     
     private let valueLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 34, weight: .bold)
+        label.font = UIFont.ypBold34()
         label.textColor = .toggleBlackWhiteColor
         return label
     }()
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12, weight: .medium)
+        label.font = UIFont.ypMedium12()
         label.textColor = .toggleBlackWhiteColor
         return label
     }()
@@ -68,6 +68,7 @@ final class StatisticCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
         gradientBorder.removeFromSuperlayer()
         
         DispatchQueue.main.async { [weak self] in

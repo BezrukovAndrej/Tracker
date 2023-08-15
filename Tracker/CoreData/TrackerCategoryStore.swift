@@ -13,9 +13,9 @@ protocol TrackerCategoryStoreDelegate: AnyObject {
 }
 
 final class TrackerCategoryStore: NSObject {
+    
     static let shared = TrackerCategoryStore()
     weak var delegate: TrackerCategoryStoreDelegate?
-    
     var categoriesCoreData: [TrackerCategoryCoreData] {
         fetchedResultsController.fetchedObjects ?? []
     }
@@ -102,6 +102,8 @@ final class TrackerCategoryStore: NSObject {
         return category
     }
 }
+
+// MARK: - Case Error
 
 extension TrackerCategoryStore {
     enum StoreError: Error {

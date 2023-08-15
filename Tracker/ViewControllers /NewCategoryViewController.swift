@@ -40,6 +40,7 @@ final class CreateCategoryViewController: UIViewController {
     
     private lazy var confirmButton: UIButton = {
         let button = UIButton(type: .custom)
+        button.setTitleColor(.blackGrayColorButton, for: .normal)
         button.backgroundColor = .uiGray
         button.isEnabled = false
         button.setTitle(NSLocalizedString("ready", comment: ""), for: .normal)

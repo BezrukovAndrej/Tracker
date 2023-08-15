@@ -85,7 +85,7 @@ final class NewTrackerViewController: UIViewController {
             button.setTitle(NSLocalizedString("create", comment: ""), for: .normal)
         }
         button.titleLabel?.font = UIFont.ypMedium16()
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.blackGrayColorButton, for: .normal)
         button.titleLabel?.textAlignment = .center
         button.backgroundColor = .uiGray
         button.isEnabled = false

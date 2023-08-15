@@ -14,6 +14,7 @@ final class SupplementaryView: UICollectionReusableView {
     lazy var headerLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.ypBold19()
+        label.textColor = .toggleBlackWhiteColor
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
