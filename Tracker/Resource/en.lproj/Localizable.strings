@@ -35,7 +35,6 @@
 // Pinned category
 "pinned" = "Pinned";
 
-
 // Tracker creation page name
 "trackerCreation" = "Tracker creation";
 
@@ -44,7 +43,6 @@
 
 // Habit button title
 "habit" = "Habit";
-
 
 
 
@@ -80,7 +78,6 @@
 
 // Limit on tracker name length
 "stringLengthLimit" = "38 character limit";
-
 
 
 
@@ -149,3 +146,25 @@
 
 // Medium value
 "mediumValue" = "Medium value";
+
+
+
+// Week Days
+"monday" = "Monday";
+"tuesday" = "Tuesday";
+"wednesday" = "Wednesday";
+"thursday" = "Thursday";
+"friday" = "Friday";
+"saturday" = "Saturday";
+"sunday" = "Sunday";
+
+
+
+// Abbreviated days of the week
+"mo" = "Mo";
+"tu" = "Tu";
+"we" = "We";
+"th" = "Th";
+"fr" = "Fr";
+"sa" = "Sa";
+"su" = "Su";

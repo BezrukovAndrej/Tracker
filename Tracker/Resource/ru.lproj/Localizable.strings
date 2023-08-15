@@ -149,3 +149,23 @@
 
 // Medium value
 "mediumValue" = "Среднее значение";
+
+
+// Week Days
+"monday" = "Понедельник";
+"tuesday" = "Вторник";
+"wednesday" = "Среда";
+"thursday" = "Четверг";
+"friday" = "Пятница";
+"saturday" = "Суббота";
+"sunday" = "Воскресеньк";
+
+
+// Abbreviated days of the week
+"mo" = "Пн";
+"tu" = "Вт";
+"we" = "Ср";
+"th" = "Чт";
+"fr" = "Пт";
+"sa" = "Сб";
+"su" = "Вс";
