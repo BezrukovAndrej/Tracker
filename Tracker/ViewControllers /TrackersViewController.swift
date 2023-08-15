@@ -403,18 +403,20 @@ extension TrackersViewController: UISearchTextFieldDelegate {
 
 extension TrackersViewController: TrackerCollectionViewCellDelegate {
     func didTapDoneButton(of cell: TrackerCollectionViewCell, with tracker: Tracker) {
-        if let recordToRemove = completedTrackers.first(where: { $0.date == currentDate && $0.trackerId == tracker.id }) {
-            try? trackerRecordStore.remove(recordToRemove)
-            cell.toggleDoneButton(false)
-            cell.decreaseCount()
-        } else {
-            let trackerRecord = TrackerRecord(trackerId: tracker.id, date: currentDate)
-            try? trackerRecordStore.add(trackerRecord)
-            cell.toggleDoneButton(true)
-            cell.increaseCount()
-            analyticsService.reportEvent(event: .click, screen: .main, item: .track)
+        if datePicker.date <= Calendar.current.startOfDay(for: Date()) {
+            if let recordToRemove = completedTrackers.first(where: { $0.date == currentDate && $0.trackerId == tracker.id }) {
+                try? trackerRecordStore.remove(recordToRemove)
+                cell.toggleDoneButton(false)
+                cell.decreaseCount()
+            } else {
+                let trackerRecord = TrackerRecord(trackerId: tracker.id, date: currentDate)
+                try? trackerRecordStore.add(trackerRecord)
+                cell.toggleDoneButton(true)
+                cell.increaseCount()
+                analyticsService.reportEvent(event: .click, screen: .main, item: .track)
+            }
+            loadTrackers()
         }
-        loadTrackers()
     }
 }
 
@@ -487,7 +489,7 @@ extension TrackersViewController {
             trackersLabel.topAnchor.constraint(equalTo: addButton.bottomAnchor, constant: 13),
             trackersLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             
-            datePicker.topAnchor.constraint(equalTo: addButton.bottomAnchor, constant: 16),
+            datePicker.topAnchor.constraint(equalTo: view.topAnchor, constant: 55),
             datePicker.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             datePicker.widthAnchor.constraint(equalToConstant: 100),
             datePicker.heightAnchor.constraint(equalToConstant: 34),
