@@ -264,6 +264,7 @@ final class NewTrackerViewController: UIViewController {
         } else {
             if (trackerColor == nil) || (trackerEmoji == nil) || (textField.text?.isEmpty == true) || (trackerCategory == nil) {
                 isCreateButtonEnable = false
+                
                 return
             }
         }
