@@ -99,10 +99,10 @@ final class TrackersViewController: UIViewController {
     )
     private var searchText = "" {
         didSet {
-            try? trackerStore.loadFilteredTrackers(date: currentDate, searchString: searchText)
+            try? trackerStore.loadFilteredTrackers(date: currentDate.onlyDate(), searchString: searchText)
         }
     }
-    private var currentDate: Date = Date()
+    private var currentDate = Date().onlyDate()
     private var completedTrackers: Set<TrackerRecord> = []
     private var editingTracker: Tracker?
     
@@ -149,8 +149,8 @@ final class TrackersViewController: UIViewController {
     
     private func loadTrackers() {
         do {
-            try trackerStore.loadFilteredTrackers(date: currentDate, searchString: searchText)
-            try trackerRecordStore.loadCompletedTrackers(by: currentDate)
+            try trackerStore.loadFilteredTrackers(date: currentDate.onlyDate(), searchString: searchText)
+            try trackerRecordStore.loadCompletedTrackers(by: currentDate.onlyDate())
         } catch {}
         collectionView.reloadData()
     }
@@ -187,7 +187,7 @@ final class TrackersViewController: UIViewController {
     
     private func changeTogglePin(tracker: Tracker) {
         try? trackerStore.togglePin(for: tracker)
-        try? trackerStore.loadFilteredTrackers(date: currentDate, searchString: searchText)
+        try? trackerStore.loadFilteredTrackers(date: currentDate.onlyDate(), searchString: searchText)
     }
     
     private func deleteTracker(forIndexPath: IndexPath) {
@@ -232,7 +232,7 @@ final class TrackersViewController: UIViewController {
     @objc
     private func searchTracker() {
         let searchText = searchTextField.text ?? ""
-        try? trackerStore.loadFilteredTrackers(date: currentDate, searchString: searchText)
+        try? trackerStore.loadFilteredTrackers(date: currentDate.onlyDate(), searchString: searchText)
         collectionView.reloadData()
         checkTrackers()
     }
@@ -403,14 +403,14 @@ extension TrackersViewController: UISearchTextFieldDelegate {
 
 extension TrackersViewController: TrackerCollectionViewCellDelegate {
     func didTapDoneButton(of cell: TrackerCollectionViewCell, with tracker: Tracker) {
-        let realDate = Date()
-        if realDate >= currentDate {
+        let realDate = Date().onlyDate()
+        if realDate >= currentDate.onlyDate() {
             if let recordToRemove = completedTrackers.first(where: { $0.date == currentDate.onlyDate() && $0.trackerId == tracker.id }) {
                 try? trackerRecordStore.remove(recordToRemove)
                 cell.toggleDoneButton(false)
                 cell.decreaseCount()
             } else {
-                let trackerRecord = TrackerRecord(trackerId: tracker.id, date: currentDate.onlyDate())
+                let trackerRecord = TrackerRecord(trackerId: tracker.id, date: currentDate)
                 try? trackerRecordStore.add(trackerRecord)
                 cell.toggleDoneButton(true)
                 cell.increaseCount()
