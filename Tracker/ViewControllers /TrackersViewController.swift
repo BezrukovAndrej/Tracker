@@ -265,7 +265,7 @@ extension TrackersViewController: UICollectionViewDataSource {
         }
         
         let interaction = UIContextMenuInteraction(delegate: self)
-        let isCompleted = completedTrackers.contains { $0.date == currentDate && $0.trackerId == tracker.id }
+        let isCompleted = completedTrackers.contains { $0.date == currentDate.onlyDate() && $0.trackerId == tracker.id }
         trackerCell.configCell(with: tracker, days: tracker.completedDaysCount, isDone: isCompleted, interaction: interaction)
         trackerCell.delegate = self
         
@@ -403,13 +403,14 @@ extension TrackersViewController: UISearchTextFieldDelegate {
 
 extension TrackersViewController: TrackerCollectionViewCellDelegate {
     func didTapDoneButton(of cell: TrackerCollectionViewCell, with tracker: Tracker) {
-        if datePicker.date <= Calendar.current.startOfDay(for: Date()) {
-            if let recordToRemove = completedTrackers.first(where: { $0.date == currentDate && $0.trackerId == tracker.id }) {
+        let realDate = Date()
+        if realDate >= currentDate {
+            if let recordToRemove = completedTrackers.first(where: { $0.date == currentDate.onlyDate() && $0.trackerId == tracker.id }) {
                 try? trackerRecordStore.remove(recordToRemove)
                 cell.toggleDoneButton(false)
                 cell.decreaseCount()
             } else {
-                let trackerRecord = TrackerRecord(trackerId: tracker.id, date: currentDate)
+                let trackerRecord = TrackerRecord(trackerId: tracker.id, date: currentDate.onlyDate())
                 try? trackerRecordStore.add(trackerRecord)
                 cell.toggleDoneButton(true)
                 cell.increaseCount()

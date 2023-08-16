@@ -250,9 +250,9 @@
 			isa = PBXGroup;
 			children = (
 				9100CFB92A8A4F9D00E74328 /* SelectTypeEventViewController.swift */,
-				911478152A5487F900E5F178 /* TrackersViewController.swift */,
 				911478192A54882D00E5F178 /* NewTrackerViewController.swift */,
 				9114781B2A54884000E5F178 /* ScheduleViewController.swift */,
+				911478152A5487F900E5F178 /* TrackersViewController.swift */,
 				91AEDE6E2A8251D000E974A8 /* CategoriesViewController.swift */,
 				91AEDE702A8253C800E974A8 /* NewCategoryViewController.swift */,
 				9114781F2A54885E00E5F178 /* StatisticsViewController.swift */,
