@@ -14,7 +14,6 @@ final class EmojiAndColorsCollectionCell: UICollectionViewCell {
     lazy var label: UILabel = {
         let label = UILabel()
         label.font = UIFont.ypBold32()
-        label.text = ""
         label.textColor = .uiBlack
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -41,6 +40,7 @@ final class EmojiAndColorsCollectionCell: UICollectionViewCell {
     }
     
     private func addSubview() {
+        
         addSubview(label)
     }
     

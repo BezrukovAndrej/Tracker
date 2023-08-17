@@ -11,9 +11,10 @@ final class SupplementaryView: UICollectionReusableView {
     
     static let identifier = Identifier.idSupple
     
-    lazy var titleLabel: UILabel = {
+    lazy var headerLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.ypBold19()
+        label.textColor = .toggleBlackWhiteColor
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -30,15 +31,15 @@ final class SupplementaryView: UICollectionReusableView {
     }
     
     private func addSubview() {
-        addSubview(titleLabel)
+        addSubview(headerLabel)
     }
     
     private func setConstraints() {
         
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 28),
-            titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
+            headerLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 28),
+            headerLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            headerLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
 }

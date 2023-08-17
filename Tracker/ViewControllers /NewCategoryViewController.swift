@@ -7,71 +7,73 @@
 
 import UIKit
 
-protocol NewCategoryViewControllerDelegate: AnyObject {
-    func create(newCategory: String?)
-    func update(editingCategory: String, with editedCategory: String)
+protocol CreateCategoryViewControllerDelegate: AnyObject {
+    func addCategory(newCategoryLabel: String)
 }
 
-final class NewCategoryViewController: UIViewController {
+final class CreateCategoryViewController: UIViewController {
     
-    weak var delegate: NewCategoryViewControllerDelegate?
-    var editingCategory: TrackerCategory?
+    weak var delegate: CreateCategoryViewControllerDelegate?
+    private var newTrackerCategory: TrackerCategory?
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
+        label.textAlignment = .center
+        label.text = NSLocalizedString("newCategory", comment: "")
         label.font = UIFont.ypMedium16()
-        label.textColor = .uiBlack
-        label.text = "Новая категория"
+        label.textColor = .toggleBlackWhiteColor
         return label
     }()
     
     private lazy var textField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Введите название категории"
-        let leftInsetView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 30))
-        textField.leftView = leftInsetView
-        textField.leftViewMode = .always
-        textField.backgroundColor = .uiBackground
-        textField.layer.cornerRadius = 16
-        textField.clipsToBounds = true
-        textField.delegate = self
-        return textField
+        let field = UITextField()
+        field.layer.masksToBounds = true
+        field.placeholder = NSLocalizedString("enterCategoryName", comment: "")
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: field.frame.height))
+        field.leftView = paddingView
+        field.leftViewMode = .always
+        field.layer.cornerRadius = 16
+        field.backgroundColor = .uiBackground
+        field.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        return field
     }()
     
-    private lazy var doneButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Готово", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont.ypMedium16()
+    private lazy var confirmButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setTitleColor(.blackGrayColorButton, for: .normal)
         button.backgroundColor = .uiGray
+        button.isEnabled = false
+        button.setTitle(NSLocalizedString("ready", comment: ""), for: .normal)
+        button.titleLabel?.textAlignment = .center
+        button.titleLabel?.font = UIFont.ypMedium16()
+        button.layer.masksToBounds = true
         button.layer.cornerRadius = 16
-        button.clipsToBounds = true
-        button.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTapСonfirmButton), for: .touchUpInside)
         return button
     }()
     
-    // MARK: - Lifecycle
+    // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .uiWhite
+        textField.text = newTrackerCategory?.title
         textField.delegate = self
-        textField.text = editingCategory?.title
+        
         addSubviews()
-        setConstrainst()
+        setConstraints()
+        
+        hideKeyboardWhenTappedAround()
     }
     
-    // MARK: - Action private funс
-    
-    @objc private func doneButtonTapped() {
+    @objc
+    private func didTapСonfirmButton() {
         if textField.hasText {
             if let category = textField.text {
-                if editingCategory == nil {
-                    delegate?.create(newCategory: category)
-                } else if let editingCategory = editingCategory {
-                    delegate?.update(editingCategory: editingCategory.title, with: category)
-                    self.editingCategory = nil
+                if newTrackerCategory == nil {
+                    delegate?.addCategory(newCategoryLabel: category)
+                } else {
+                    newTrackerCategory = nil
                 }
                 dismiss(animated: true)
             }
@@ -81,57 +83,43 @@ final class NewCategoryViewController: UIViewController {
 
 // MARK: - UITextFieldDelegate
 
-extension NewCategoryViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        
-        return true
-    }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if range.location == 0 && string == " " {
-            return false
-        } else if textField.text?.isEmpty == true && !string.isEmpty {
-            doneButton.backgroundColor = .uiBlack
-            doneButton.setTitleColor(.uiWhite, for: .normal)
-        }
-        return true
-    }
-    
+extension CreateCategoryViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        if textField.text?.isEmpty == true {
-            doneButton.backgroundColor = .uiGray
-            doneButton.setTitleColor(.uiWhite, for: .normal)
+        if textField.hasText {
+            confirmButton.backgroundColor = .toggleBlackWhiteColor
+            confirmButton.isEnabled = true
+        } else {
+            confirmButton.backgroundColor = .uiGray
+            confirmButton.isEnabled = false
         }
     }
 }
 
 // MARK: - Set constraints / Add subviews
 
-extension NewCategoryViewController {
+extension CreateCategoryViewController {
     
     private func addSubviews() {
-        [titleLabel, textField, doneButton].forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview($0)
-        }
+        view.backgroundColor = .uiWhite
+        
+        [titleLabel, confirmButton,textField].forEach {view.addViewsTAMIC($0)}
     }
     
-    private func setConstrainst() {
+    private func setConstraints() {
+        
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 40),
             
-            textField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 38),
             textField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             textField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            textField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 38),
             textField.heightAnchor.constraint(equalToConstant: 75),
-            textField.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -32),
             
-            doneButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
-            doneButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            doneButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            doneButton.heightAnchor.constraint(equalToConstant: 60),
+            confirmButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
+            confirmButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            confirmButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            confirmButton.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
 }

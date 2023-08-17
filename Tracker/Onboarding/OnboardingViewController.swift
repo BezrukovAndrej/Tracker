@@ -8,6 +8,7 @@
 import UIKit
 
 final class OnboardingViewController: UIViewController {
+    
     private(set) var page: Pages
     
     private lazy var imageView: UIImageView = {

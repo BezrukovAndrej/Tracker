@@ -13,4 +13,10 @@ struct Identifier {
     static let idHeader = "HeaderCollectionView"
     static let idEmojiAndColorsCell = "EmojiAndColorsCollectionCell"
     static let idSupple = "Header"
+    static let idCategoryCell = "CategoryCell"
+    static let idStatisticCell = "StatisticCell"
+}
+
+struct Api {
+        static let yandexMetricaKey = "b87f564c-717c-41be-ab43-a005b5d6caee"
 }
