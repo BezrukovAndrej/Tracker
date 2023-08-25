@@ -3,6 +3,9 @@
 Приложение помогает пользователям формировать полезные привычки и контролировать их выполнение.
 
 ## Скриншот
+<a href="https://ibb.co/x2bRwMG"><img src="https://i.ibb.co/vcWKfJm/Tracker-White.jpg" alt="Tracker-White" border="0"></a>
+
+<a href="https://ibb.co/bPJ8xbC"><img src="https://i.ibb.co/L852MNc/Tracker-Black.jpg" alt="Tracker-Black" border="0"></a>
 
 ## Ссылки
 [Дизайн в Figma](https://www.figma.com/file/owAO4CAPTJdpM1BZU5JHv7/Tracker-(YP)?t=SZDLmkWeOPX4y6mp-0)
